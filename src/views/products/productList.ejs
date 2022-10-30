@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    
+    <%- include('../partials/head.ejs') %>
+
+    <body>
+
+        <%- include('../partials/header.ejs') %>
+
+        <main>
+            
+            
+            <section class="shop">
+                <h3>Productos - Shop</h3>
+                <div class="products">
+
+                    <% for (let i=0; i<planta.length; i++) {  %>                    
+                        <article>
+                            <a href="/product/detail/<%= planta[i].id %>">
+                                <img src="/images/<%= planta[i].imagen %>" alt="planta1" class="product_img">
+                                <div class="main-article">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <div class="precio-desc">
+                                        <p class="price"><%= planta[i].precio %></p>
+                                        <p class="discount"><%= planta[i].descuento %></p>
+                                    </div>
+                                    <h4 class="description"><%= planta[i].nombre %></h4>
+                                </div>
+                            </a>
+                        </article>
+                    <% }  %> 
+
+                </div>  
+
+                <form action="/product/create" method="get">
+                    <button>Agregar producto</button>
+                </form>
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+            </section>
+            
+        </main>
+
+        <%- include('../partials/footer.ejs') %>
+        
+    </body>
+</html>

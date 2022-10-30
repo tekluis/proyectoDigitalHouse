@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <main>
+    
+        <div class="detalle-planta">
+            <img src="/images/<%= planta.imagen %>" alt="">
+            <h3><%= planta.nombre %></h3>
+            <br>
+            <h4><%= planta.precio %></h4>
+            <br>
+            <p><%= planta.descuento %></p>
+            <br>
+        </div>
+    
+    <form action="/product/detail/<%= planta.id %>" method="post">
+            <button>Agregar al carrito</button>
+    </form>
+    <br>
+    <form action="/product/edit/<%= planta.id %>" method="get">
+        <button>Editar</button>
+    </form>
+    <br>
+    <form action="/product/edit/<%= planta.id %>?_method=DELETE" method="post">
+        <button>Eliminar</button>
+    </form>
+    <br>
+    <br>
+    <br>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

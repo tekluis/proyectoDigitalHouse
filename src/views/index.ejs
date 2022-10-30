@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    
+    <%- include('partials/head.ejs') %>
+
+    <body>
+
+        <%- include('./partials/header.ejs') %>
+
+        <main>
+            
+            <%- include('./partials/banner.ejs') %>
+            
+            <section class="shop">
+                <h3>Productos - Shop</h3>
+                <div class="products">
+
+
+                    <% for (let i=0; i<3; i++) {  %>                    
+                        <article>
+                            <a href="/product/detail/<%= planta[i].id %>">
+                                <img src="/images/<%= planta[i].imagen %>" alt="planta1" class="product_img">
+                                <div class="main-article">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <div class="precio-desc">
+                                        <p class="price"><%= planta[i].precio %></p>
+                                        <p class="discount"><%= planta[i].descuento %></p>
+                                    </div>
+                                    <h4 class="description"><%= planta[i].nombre %></h4>
+                                </div>
+                            </a>
+                        </article>
+                    <% }  %> 
+
+
+
+                    <article>
+                        <a href="/product/list">
+                            <img src="/images/masProductos.jpeg" alt="planta3" class="product_img">
+                            <div class="main-article">
+                                <div class="precio-desc">
+                                </div>
+                            <h4 class="description">Ver más productos</h4>
+                            </div>
+                        </a>
+                    </article>
+                </div>  
+            </section>
+            <section class="articulos">
+                <article>
+                    <div class="noticias">
+                        <i class="texto">
+                            <h1 class="comunidad">Comunidad</h1>
+                            <p class="texto_web">
+                                Tener y trabajar en una huerta proporciona un buen número de beneficios. Los más evidentes son los productos obtenidos del huerto mismo, sin químicos que contaminan tanto los vegetales como el suelo.
+                                Ademas, los trabajos de jardinería ayudan a reducir los niveles de estrés, tanto a nivel afectivo como fisiológico.
+                                Por ultimo, el contacto con la naturaleza brinda muchos efectos positivos. Si ya el cuidado de plantas de interior permite en pequeña medida ese contacto, el trabajo en un huerto o un jardín lo amplía, al tratarse en general de superficies mayores. 
+                            </p>
+                            <p class="texto_mobile">
+                                Beneficios de tener una huerta en casa. Proporciona alimentos naturales, ayuda a reducir el estres a nivel afectivo y fisiológico.
+                            </p>
+                        </i>
+                        <img src="images/huerto.jpeg" alt="huerto" class="huerto">
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <%- include('partials/footer.ejs') %>
+        
+    </body>
+</html>

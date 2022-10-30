@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    
+    <%- include('../partials/head.ejs') %>
+
+    <body>
+
+        <%- include('../partials/header.ejs') %>
+
+        <main>
+            
+            <section class="shop">
+                <h3>Usuarios</h3>
+                <div>
+
+                    <% for (let i=0; i<usuario.length; i++) {  %>    
+                        <div>
+                            <a href="/user/detail/<%= usuario[i].id %>">                                    
+                                <img src="/images/<%= usuario[i].imagen %>" alt="planta1" class="carrito_img">
+                                <span class="name"><%= usuario[i].nombre %></span>
+                                <span class="apellido"><%= usuario[i].apellido %></span>
+                                <span class="categoria"><%= usuario[i].categoria %></span>
+                                <span class="email"><%= usuario[i].email %></span>
+                                <span class="password"><%= usuario[i].password %></span>
+                                <span>
+                                    <form action="/user/list/<%= usuario[i].id %>?_method=DELETE" method="post">
+                                        <button class="boton_carrito">X</button>
+                                    </form>
+                                </span>
+                            </a>
+                        </div>
+                    <% }  %> 
+
+                </div>  
+
+                <form action="/user/register" method="get">
+                    <button>Agregar usuario</button>
+                </form>
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+            </section>
+            
+        </main>
+
+        <%- include('../partials/footer.ejs') %>
+        
+    </body>
+</html>

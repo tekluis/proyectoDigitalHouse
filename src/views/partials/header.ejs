@@ -1,0 +1,28 @@
+<header>
+    <div class="top-header">
+        <div class="burger-menu">
+            <i class="fa fa-bars burger"></i>
+        </div>  
+        <div class="logo"> 
+            <a href="/"> <img src="/images/logo.png" alt="Logo"> </a>
+        </div>   
+        <nav class="menu-nav">
+            <ul class="menu-1">
+                <li><a href="/product/list">Plantas</a></li>
+                <li><a href="/product/list">Macetas</a></li>
+                <li><a href="#">Contactos</a></li>
+            </ul>
+            <ul class="menu-2">
+                <% if (locals.usuario) { %>
+                    <p><%=locals.usuario.nombre   %></p>
+                    <li><a href="/user/logout">  <span>  </span> <i class="fas fa-sign-out-alt"></i>  </a></li>
+                    <li><a href="/user/list"> <span> Usuarios </span> <i class="fas fa-list"></i></a></li>
+                <% } else { %>
+                    <li><a href="/user/login">  <span> Ingresa </span> <i class="fas fa-sign-in-alt"></i>  </a></li>
+                    <li><a href="/user/register"> <span> Registrate </span> <i class="fas fa-id-card"></i></a></li>
+                    <% } %>
+                <li><a href="/product/cart"> <span>Tu carrito </span><i class="fas fa-shopping-basket"> </i></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>

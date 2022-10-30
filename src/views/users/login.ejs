@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <%- include('../partials/head.ejs') %>
+    <body>
+
+        <%- include('../partials/header.ejs') %>
+
+
+        <main>
+        
+            <div class="titulo-ingreso-datos">
+                <h2 > Ingresa tus datos:</h2>
+            </div>
+                
+            <form class="ingreso-datos" action="/user/login" method="POST">
+                <% if(locals.errorLogeo) { %>
+                    <div> <%= errorLogeo %></div>
+                <% } %>
+                <% if(locals.errorIngreso) { %>
+                    <div> <%= errorIngreso %></div>
+                <% } %>
+                <div><input type="email" name="email" placeholder="Correo"></div> 
+                <div><input type="password" name="password" placeholder="Contraseña"></div> 
+ 
+                <div>
+                    <input type="checkbox" name="recordar" id="recordar">
+                    <label for="recordar"> Recordar usuario </label>
+                </div>
+                <div class="botones">
+                    <div><input class="boton_enviar" type="submit" value="Enviar"></div>
+                    <div><input class="boton_reset" type="reset" value="Borrar"></div>
+                </div>
+            </form>
+
+            
+            
+
+
+        <br>
+        <br>
+        <br>
+            
+        </main>
+
+        <%- include('../partials/footer.ejs') %>
+        
+    </body>
+</html>

@@ -1,0 +1,29 @@
+[
+    {
+        "id": 2,
+        "nombre": "Facundo",
+        "apellido": "Neselis",
+        "categoria": "Admin",
+        "email": "fneselis@gmail.com",
+        "password": "fneselis",
+        "imagen": "circulo2.jpeg"
+    },
+    {
+        "id": 4,
+        "nombre": "Florencia",
+        "apellido": "Arroyo",
+        "categoria": "Admin",
+        "email": "farroyo@gmail.com",
+        "password": "farroyo",
+        "imagen": "1664834290730_img_.jpg"
+    },
+    {
+        "id": 18,
+        "nombre": "1234",
+        "apellido": "1234",
+        "categoria": "1234",
+        "email": "1234@gmail.com",
+        "password": "$2a$10$j7kzRVOrCpLDn59DVvXalujIdJt0q0JbNv/vcxtO7JjY3lNSRfbHy",
+        "imagen": "1666045912753_img_.jpeg"
+    }
+]

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <main>
+    
+        <div class="detalle-usuario">
+            <img src="/images/<%= user.imagen %>" alt="" width="200px">
+            <h3><%= user.nombre %></h3>
+            <br>
+            <h4><%= user.apellido %></h4>
+            <br>
+            <p><%= user.email %></p>
+            <br>
+        </div>
+    
+    <br>
+
+    <br>
+    <br>
+    <br>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

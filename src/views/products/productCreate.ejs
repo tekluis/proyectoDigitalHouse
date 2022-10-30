@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <%- include('../partials/head.ejs') %>
+    <body>
+        <%- include('../partials/header.ejs') %>
+        
+        
+        <div class="titulo-ingreso-datos">
+            <h2 > Registra los datos del nuevo producto:</h2>
+        </div>
+            
+        <form class="ingreso-datos" action="/product/create" enctype="multipart/form-data" method="POST">
+            <div><input type="text" name="nombre" placeholder="Nombre del producto" value="<%= locals.old && locals.old.nombre %>"></div> 
+            <% if (locals.errors && errors.nombre) { %>
+                <p><%=errors.nombre.msg%></p>
+            <% } %> 
+            <div><input type="text" name="descuento" placeholder="Descuento" value="<%= locals.old && locals.old.nombre %>"></div>
+            <% if (locals.errors && errors.descuento) { %>
+                <p><%=errors.descuento.msg%></p>
+            <% } %> 
+            <div><input type="text" name="categoria" placeholder="Categoria" value="<%= locals.old && locals.old.categoria %>"></div>
+            <% if (locals.errors && errors.categoria) { %>
+                <p><%=errors.categoria.msg%></p>
+            <% } %> 
+            <div><input type="text" name="tamano" placeholder="Tamano" value="<%= locals.old && locals.old.tamano %>"></div> 
+            <% if (locals.errors && errors.tamano) { %>
+                <p><%=errors.tamano.msg%></p>
+            <% } %> 
+            <div><input type="file" name="imagen" placeholder="Imagen"></div>
+            <% if (locals.old && !old.file) { %>
+                <p>Debe subir un archivo</p>
+            <% } %> 
+            <div><input type="text" name="precio" placeholder="Precio" value="<%= locals.old && locals.old.precio %>"></div> 
+            <% if (locals.errors && errors.precio) { %>
+                <p><%=errors.precio.msg%></p>
+            <% } %> 
+ 
+
+
+            <div class="botones">
+                <div><input class="boton_enviar" type="submit" value="Enviar"></div>
+                <div><input class="boton_reset" type="reset" value="Borrar"></div>
+            </div>
+
+        
+        </form>
+
+        
+        <br>
+        <br>
+        <br>
+
+        </main>
+
+        <%- include('../partials/footer.ejs') %>
+        
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <%- include('../partials/head.ejs') %>
+    <body>
+        <%- include('../partials/header.ejs') %>
+        
+        
+        <div class="titulo-ingreso-datos">
+            <h2 > Registra los datos del nuevo producto:</h2>
+        </div>
+            
+        <form class="ingreso-datos" action="/product/edit/<%= planta.id %>?_method=PUT" enctype="multipart/form-data" method="POST">
+            <div>
+                <label nombre> Nombre </label>
+                <input type="text" name="nombre" value="<%= planta.nombre %>">
+            </div> 
+            <div>
+                <label descuento> Descuento </label>
+                <input type="text" name="descuento" value="<%= planta.descuento %>">
+            </div> 
+            <div>
+                <label imagen> Imagen </label>
+                <input type="file" name="imagen" value="<%= planta.imagen %>">
+            </div>
+            <div>
+                <label precio> Precio </label>
+                <input type="text" name="precio" value="<%= planta.precio %>">
+            </div> 
+            <div class="botones">
+                <div>
+                    <input class="boton_enviar" type="submit" value="Guardar">
+                </div>
+            </div>
+        
+        </form>
+        
+        </main>
+
+        <%- include('../partials/footer.ejs') %>
+        
+    </body>
+</html>

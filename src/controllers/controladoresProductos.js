@@ -1,3 +1,7 @@
+
+const db = require ('../../database/models')
+const { Op } = require("sequelize");
+
 const fs = require("fs");
 const path = require('path');                                           // habilita path
 const bcrypt = require("bcryptjs");
@@ -27,35 +31,50 @@ function salvarCarrito(data){
  }
 
 let controladores = {
-    
+
     index: function(req,res) {
-        const plantas = cargarProductos();
-        res.render(path.join(__dirname,'../views/index.ejs'), {planta:plantas});          // devuelve la página index.ejs al llamar a controlador.index
+        db.products.findAll({
+                order:[['id','ASC']],
+                offset:0,
+                limit:100
+            })
+            .then((plantas) => {
+                res.render(path.join(__dirname,'../views/index.ejs'), {planta:plantas}); 
+            })
+    },
+
+
+      productList: function(req,res) {
+        db.products.findAll(
+            {
+                order:[['id','ASC']],
+                offset:0,
+                limit:100
+            }
+        )
+            .then((plantas) => {
+                res.render(path.join(__dirname,'../views/products/productList.ejs'), {planta:plantas}); 
+            })
     },
     
-    productList: function(req,res) {
-        const plantas = cargarProductos();
-        res.render(path.join(__dirname,'../views/products/productList.ejs'), {planta:plantas});          // devuelve la página index.ejs al llamar a controlador.index
+    
+    productDetail: function(req,res) {
+        db.products.findByPk(req.params.id)
+            .then((plantaEncontrada) => {
+                res.render(path.join(__dirname,'../views/products/ProductDetail.ejs'), {planta:plantaEncontrada}); 
+            })
+    },
+
+    productCreate:  function(req,res) {
+        res.render(path.join(__dirname,'../views/products/productCreate.ejs'));
     },
 
     productCart:  function(req,res) {
         const carritos = cargarCarrito();
         res.render(path.join(__dirname,'../views/products/productCart.ejs'), {carrito:carritos});
-    },
-
-    productDetail:  function(req,res) {
-        const plantas = cargarProductos();
-        let plantaEncontrada = plantas.find(planta => {
-            return planta.id == req.params.id
-        })
-        res.render(path.join(__dirname,'../views/products/ProductDetail.ejs'), { planta : plantaEncontrada});
-    },
+    },        
 
 
-
-    productCreate:  function(req,res) {
-        res.render(path.join(__dirname,'../views/products/productCreate.ejs'));
-    },
 
     crearProducto: function(req,res) {
         const plantas = cargarProductos();

@@ -1,10 +1,8 @@
-
 const db = require ('../../database/models')
 const { Op } = require("sequelize");
 
 const fs = require("fs");
 const path = require('path');                                           // habilita path
-const bcrypt = require("bcryptjs");
 const {validationResult} = require('express-validator');
 
 function cargarProductos(){
@@ -13,11 +11,6 @@ function cargarProductos(){
     return data
 }
 
-
-function salvarProductos(data){
-    const dataString = JSON.stringify(data, null, 4);
-    fs.writeFileSync(path.join(__dirname, "../data/products.json"), dataString);
-}
 
 function cargarCarrito(){
     const jsonData = fs.readFileSync(path.join(__dirname, "../data/carrito.json"));
@@ -68,6 +61,8 @@ let controladores = {
     },
 
     productCart:  function(req,res) {
+        
+
         const carritos = cargarCarrito();
         res.render(path.join(__dirname,'../views/products/productCart.ejs'), {carrito:carritos});
     },        

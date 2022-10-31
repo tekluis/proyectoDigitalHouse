@@ -44,14 +44,12 @@ let controladores = {
     },
 
 
-      productList: function(req,res) {
-        db.products.findAll(
-            {
+    productList: function(req,res) {
+        db.products.findAll({
                 order:[['id','ASC']],
                 offset:0,
                 limit:100
-            }
-        )
+            })
             .then((plantas) => {
                 res.render(path.join(__dirname,'../views/products/productList.ejs'), {planta:plantas}); 
             })
@@ -61,7 +59,7 @@ let controladores = {
     productDetail: function(req,res) {
         db.products.findByPk(req.params.id)
             .then((plantaEncontrada) => {
-                res.render(path.join(__dirname,'../views/products/ProductDetail.ejs'), {planta:plantaEncontrada}); 
+                res.render(path.join(__dirname,'../views/products/productDetail.ejs'), {planta:plantaEncontrada}); 
             })
     },
 
@@ -75,25 +73,18 @@ let controladores = {
     },        
 
 
-
     crearProducto: function(req,res) {
-        const plantas = cargarProductos();
         let errors=validationResult(req);
-
         if (errors.isEmpty() && req.file) {
-
-            const nuevaPlanta = {
-                id: plantas[plantas.length-1].id + 1,
+            db.products.create({
                 nombre: req.body.nombre,
                 precio: req.body.precio,
                 categoria: req.body.categoria,
                 tamano: req.body.tamano,
                 descuento: req.body.descuento,
-                imagen: req.file.filename
-            }
-            plantas.push(nuevaPlanta);
-            salvarProductos(plantas);
-            res.redirect('/product/list');                                              // envía a la página de home luego de cargar los datos del formulario
+                imagen: req.file.filename 
+            })
+            .then(res.redirect('/product/list'));                                              // envía a la página de home luego de cargar los datos del formulario
 
         } else {
             res.render(path.join(__dirname,'../views/products/productCreate.ejs'), {errors:errors.mapped(), old:req.body});
@@ -101,42 +92,41 @@ let controladores = {
 
     },
 
-
     actualizarProducto : function(req,res) {
-        const plantas = cargarProductos();
 
-        let plantaEncontrada = plantas.find(planta => {
-            return planta.id == req.params.id
-        })
-
-        plantaEncontrada.nombre=req.body.nombre;
-        plantaEncontrada.precio=req.body.precio;
-        plantaEncontrada.categoria=req.body.categoria;
-        plantaEncontrada.tamano=req.body.tamano;
-        plantaEncontrada.descuento=req.body.descuento;
         if (req.file) {
-            plantaEncontrada.imagen=req.file.filename;
+            db.products.update ({
+                nombre: req.body.nombre,
+                precio: req.body.precio,
+                categoria: req.body.categoria,
+                tamano: req.body.tamano,
+                descuento: req.body.descuento,
+                imagen: req.file.filename
+            },{
+                where: {id:req.params.id}
+            })
+            .then(res.redirect('/product/list'));                                              // envía a la página de home luego de cargar los datos del formulario
+
+        }else{
+            db.products.update ({
+                nombre: req.body.nombre,
+                precio: req.body.precio,
+                categoria: req.body.categoria,
+                tamano: req.body.tamano,
+                descuento: req.body.descuento,
+                // imagen: req.file.filename
+            },{
+                where: {id:req.params.id}
+            })
+            .then(res.redirect('/product/list'));                                              // envía a la página de home luego de cargar los datos del formulario
         }
-
-        salvarProductos(plantas);
-
-        res.redirect('/product/list');                                              // envía a la página de home luego de cargar los datos del formulario
-
     },
 
     borrarProducto: function(req,res) {
-        const plantas = cargarProductos();
-        
-        let indiceEncontrado = plantas.findIndex(planta => {
-            return planta.id == req.params.id
+        db.products.destroy ({
+            where: {id:req.params.id}
         })
-
-        plantas.splice(indiceEncontrado,1);
-
-        salvarProductos(plantas);
-
-        res.redirect('/product/list');
-
+        .then(res.redirect('/product/list'));
     },
 
     borrarCarrito: function(req,res) {
@@ -172,13 +162,20 @@ let controladores = {
         salvarCarrito(carritos);
     },
 
+
+    // productEdit: function(req,res){
+    //     const plantas = cargarProductos();
+    //     let plantaEncontrada = plantas.find(planta => {
+    //         return planta.id == req.params.id
+    //     })
+    //     res.render(path.join(__dirname,'../views/products/productEdit.ejs'), { planta : plantaEncontrada});
+    // },
  
     productEdit: function(req,res){
-        const plantas = cargarProductos();
-        let plantaEncontrada = plantas.find(planta => {
-            return planta.id == req.params.id
-        })
-        res.render(path.join(__dirname,'../views/products/productEdit.ejs'), { planta : plantaEncontrada});
+        db.products.findByPk(req.params.id)
+            .then((plantaEncontrada) => {
+                res.render(path.join(__dirname,'../views/products/productEdit.ejs'), {planta:plantaEncontrada}); 
+            })
     },
 
     comprar:  function(req,res) {

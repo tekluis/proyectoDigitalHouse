@@ -47,6 +47,24 @@ let controladores = {
                 res.render(path.join(__dirname,'../views/products/productList.ejs'), {planta:plantas}); 
             })
     },
+
+    plantasList: function(req,res) {
+        db.products.findAll({
+                where:{categoria:"planta"}
+            })
+            .then((plantas) => {
+                res.render(path.join(__dirname,'../views/products/productList.ejs'), {planta:plantas}); 
+            })
+    },
+
+    macetasList: function(req,res) {
+        db.products.findAll({
+                where:{categoria:"maceta"}
+            })
+            .then((plantas) => {
+                res.render(path.join(__dirname,'../views/products/productList.ejs'), {planta:plantas}); 
+            })
+    },
     
     
     productDetail: function(req,res) {

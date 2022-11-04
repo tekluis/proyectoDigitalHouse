@@ -5,7 +5,7 @@ function estaLogeado(req,res,next) {
         next();
     } else {
 //      res.redirect('/user/login');
-        res.render(path.join(__dirname,'../views/users/login.ejs'), {errorLogeo:"Debe loguearse para ver el carrito"});
+        res.render(path.join(__dirname,'../views/users/login.ejs'), {errorLogeo:"Para continuar debe estar logueado"});
     }
 }
 

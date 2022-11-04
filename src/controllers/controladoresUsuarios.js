@@ -15,7 +15,13 @@ let controladores = {
             limit:100
         })
         .then((usuarios) => {
-            res.render(path.join(__dirname,'../views/users/usersList.ejs'), {usuario:usuarios}); 
+            console.log(req.session.usuarioLogeado.categoria);
+            if(req.session.usuarioLogeado.categoria=="Admin") {
+                res.render(path.join(__dirname,'../views/users/usersList.ejs'), {usuario:usuarios});          // devuelve la página index.ejs al llamar a controlador.index
+            } else {
+                res.redirect('/user/detail/'+req.session.usuarioLogeado.id);
+            }
+
         })
     },
 
@@ -78,6 +84,7 @@ let controladores = {
                     req.session.usuarioLogeado = {
                         id: usuarioEncontrado.id,
                         nombre: usuarioEncontrado.nombre,
+                        categoria: usuarioEncontrado.categoria
                     }
             
                     if(req.body.recordar) {

@@ -5,7 +5,7 @@ const controladoresProductos = require('../controllers/controladoresProductos');
 const multer = require('multer');                                    // requiere multer en nuestro router
 const path = require("path");
 const estaLogeado = require("../middleware/estaLogeado");
-const noEstaLogeado = require("../middleware/noEstaLogeado");
+const noEstaLogeado = require("../middleware/esAdmin");
 
 const storage = multer.diskStorage({                                // configuración multer para guardar archivo imagen
     destination: function (req, file, cb) { 

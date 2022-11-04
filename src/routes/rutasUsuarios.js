@@ -4,7 +4,7 @@ const controladoresUsuarios = require('../controllers/controladoresUsuarios');  
 const multer = require('multer');                                    // requiere multer en nuestro router
 const path = require("path");
 const estaLogeado = require("../middleware/estaLogeado");
-const noEstaLogeado = require("../middleware/noEstaLogeado");
+const esAdmin = require("../middleware/esAdmin");
 const {body} = require('express-validator');
 
 const validateRegister = [

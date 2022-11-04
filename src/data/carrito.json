@@ -1,14 +1,5 @@
 [
     {
-        "id": 3,
-        "nombre": "Planta Monstera 30cm",
-        "precio": "$3.250",
-        "categoria": "planta",
-        "tamano": "grande",
-        "descuento": "15% off",
-        "imagen": "monstera.jpg"
-    },
-    {
         "id": 5,
         "nombre": "Planta Potus 50cm",
         "precio": "$1.995",
@@ -43,5 +34,24 @@
         "tamano": "grande",
         "descuento": "",
         "imagen": "potus2.jpeg"
-    }
+    },
+    {
+        "id": 1,
+        "nombre": "Maceta Tamaño M",
+        "precio": "$4.990",
+        "categoria": "maceta",
+        "tamano": "grande",
+        "descuento": "10% off",
+        "imagen": "circulo2.jpeg"
+    },
+    {
+        "id": 1,
+        "nombre": "Maceta Tamaño M",
+        "precio": "$4.990",
+        "categoria": "maceta",
+        "tamano": "grande",
+        "descuento": "10% off",
+        "imagen": "circulo2.jpeg"
+    },
+    null
 ]

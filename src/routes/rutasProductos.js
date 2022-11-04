@@ -4,7 +4,7 @@ const controladoresProductos = require('../controllers/controladoresProductos');
 const multer = require('multer');                                    // requiere multer en nuestro router
 const path = require("path");
 const estaLogeado = require("../middleware/estaLogeado");
-const noEstaLogeado = require("../middleware/noEstaLogeado");
+const esAdmin = require("../middleware/esAdmin");
 const {body} = require('express-validator');
 
 const validateRegister = [
@@ -33,8 +33,10 @@ const uploadFile = multer({ storage });
 
 router.get('/cart', estaLogeado, controladoresProductos.productCart);
 router.get('/detail/:id', controladoresProductos.productDetail);
-router.get('/create', controladoresProductos.productCreate);
-router.get('/edit/:id', estaLogeado, controladoresProductos.productEdit);
+router.get('/create', esAdmin, controladoresProductos.productCreate);
+router.get('/edit/:id', esAdmin, controladoresProductos.productEdit);
+router.get('/list/plantas', controladoresProductos.plantasList);
+router.get('/list/macetas', controladoresProductos.macetasList);
 router.get('/list', controladoresProductos.productList);
 router.get('/comprar', controladoresProductos.comprar);
 
@@ -43,7 +45,7 @@ router.post('/cart', controladoresProductos.finalizarCompra);
 router.post('/detail/:id', controladoresProductos.agregarCarrito);
 router.post('/create', uploadFile.single('imagen'), validateRegister, controladoresProductos.crearProducto);
 router.put('/edit/:id', uploadFile.single('imagen'), controladoresProductos.actualizarProducto);
-router.delete('/edit/:id', controladoresProductos.borrarProducto);
+router.delete('/edit/:id', esAdmin, controladoresProductos.borrarProducto);
 router.delete('/cart/:id', controladoresProductos.borrarCarrito);
 
 module.exports = router;                                            // exporta ruteador

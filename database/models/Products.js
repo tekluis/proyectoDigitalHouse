@@ -38,5 +38,15 @@ module.exports = (sequelize, dataTypes) => {
 
     const Products = sequelize.define(alias, cols, config);
 
+    Products.associate = function (models) {
+        Products.belongsToMany(models.users, { // models.Movie -> Movies es el valor de alias en movie.js
+            as: "users",
+            through: 'carrito',
+            foreignKey: 'id_products',
+            otherKey: 'id_users',
+            timestamps: false
+        })
+    }
+
     return Products;
 }

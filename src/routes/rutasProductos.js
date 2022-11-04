@@ -42,7 +42,7 @@ router.get('/comprar', controladoresProductos.comprar);
 
 
 router.post('/cart', controladoresProductos.finalizarCompra);
-router.post('/detail/:id', controladoresProductos.agregarCarrito);
+router.post('/detail/:id', estaLogeado, controladoresProductos.agregarCarrito);
 router.post('/create', uploadFile.single('imagen'), validateRegister, controladoresProductos.crearProducto);
 router.put('/edit/:id', uploadFile.single('imagen'), controladoresProductos.actualizarProducto);
 router.delete('/edit/:id', esAdmin, controladoresProductos.borrarProducto);

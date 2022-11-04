@@ -80,9 +80,15 @@ let controladores = {
 
     productCart:  function(req,res) {
         
+        db.users.findAll({
+            include:['products'],
+            where:{id:req.session.usuarioLogeado.id}
+        })
+        .then((usuario) => {
+            console.log(usuario.products)
+            res.render(path.join(__dirname,'../views/products/productCart.ejs'), {carrito:usuario.products}); 
+        })
 
-        const carritos = cargarCarrito();
-        res.render(path.join(__dirname,'../views/products/productCart.ejs'), {carrito:carritos});
     },        
 
 
@@ -143,15 +149,13 @@ let controladores = {
     },
 
     borrarCarrito: function(req,res) {
-        const carritos = cargarCarrito();
-
-        let indiceEncontrado = carritos.findIndex(carrito => {
-            return carrito.id == req.params.id
+        db.carrito.destroy ({
+            where: [
+                {id_users: req.session.usuarioLogeado.id},
+                {id_products: req.params.id}
+            ]
         })
-
-        carritos.splice(indiceEncontrado,1);
-        salvarCarrito(carritos);
-        res.redirect('/product/cart');
+        .then(res.redirect('/product/cart'));
     },
 
     finalizarCompra: function(req,res) {
@@ -161,18 +165,13 @@ let controladores = {
     },
 
     agregarCarrito: function(req,res) {
-        const plantas = cargarProductos();
-        const carritos = cargarCarrito();
 
-        let plantaEncontrada = plantas.find(planta => {
-            return planta.id == req.params.id
+        db.carrito.create({
+            id_users: req.session.usuarioLogeado.id,
+            id_products: req.params.id
         })
+        .then(res.redirect('/product/cart'));  
 
-        carritos.push(plantaEncontrada);
-
-        res.redirect('/product/cart');
-
-        salvarCarrito(carritos);
     },
 
 

@@ -43,14 +43,14 @@ let controladores = {
     crearUsuario: function(req,res) {
         let errors=validationResult(req);
 
-        if (errors.isEmpty() && req.file) {
+        if (errors.isEmpty()) {
             db.users.create({
                 nombre: req.body.nombre,
                 apellido: req.body.apellido,
                 categoria: req.body.categoria,
                 email: req.body.email,
                 password: bcrypt.hashSync(req.body.password, 10),
-                imagen: req.file.filename 
+                imagen: req.file ? req.file.filename : "usuario.jpg"
             })
             .then(res.redirect('/product/list'));                                              // envía a la página de home luego de cargar los datos del formulario
 

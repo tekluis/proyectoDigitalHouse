@@ -432,6 +432,7 @@ main section .products article{
         flex-wrap: wrap;
         width: 90%;
         margin: auto;
+        display: inline;
     }
     
     main button {

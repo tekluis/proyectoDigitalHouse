@@ -85,23 +85,23 @@ let controladores = {
             where:{id:req.session.usuarioLogeado.id}
         })
         .then((usuario) => {
-            console.log(usuario.products)
-            res.render(path.join(__dirname,'../views/products/productCart.ejs'), {carrito:usuario.products}); 
+            //res.send(usuario[0].products)
+
+            res.render(path.join(__dirname,'../views/products/productCart.ejs'), {carrito:usuario[0].products}); 
         })
 
     },        
 
-
     crearProducto: function(req,res) {
         let errors=validationResult(req);
-        if (errors.isEmpty() && req.file) {
+        if (errors.isEmpty()) {
             db.products.create({
                 nombre: req.body.nombre,
                 precio: req.body.precio,
                 categoria: req.body.categoria,
                 tamano: req.body.tamano,
                 descuento: req.body.descuento,
-                imagen: req.file.filename 
+                imagen: req.file ? req.file.filename : "plant.jpeg"
             })
             .then(res.redirect('/product/list'));                                              // envía a la página de home luego de cargar los datos del formulario
 

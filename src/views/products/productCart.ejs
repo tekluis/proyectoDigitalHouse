@@ -15,11 +15,9 @@
                         <span class="name"><%= carrito[i].nombre %></span>
                         <span class="discount"><%= carrito[i].descuento %></span>
                         <span class="price"><%= carrito[i].precio %></span>
-                        <span>
-                            <form action="/product/cart/<%= carrito[i].id %>?_method=DELETE" method="POST">
-                                <input type="submit" class="boton_carrito" value="X"></input>
-                            </form>
-                        </span>
+                        <form action="/product/cart/<%= carrito[i].id %>?_method=DELETE" method="POST">
+                            <input type="submit" class="boton_carrito" value="X"></input>
+                        </form>
                     </div>
                 <% }  %> 
             </div>

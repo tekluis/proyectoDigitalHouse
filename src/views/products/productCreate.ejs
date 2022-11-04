@@ -14,7 +14,7 @@
             <% if (locals.errors && errors.nombre) { %>
                 <p><%=errors.nombre.msg%></p>
             <% } %> 
-            <div><input type="text" name="descuento" placeholder="Descuento" value="<%= locals.old && locals.old.nombre %>"></div>
+            <div><input type="text" name="descuento" placeholder="Descuento" value="<%= locals.old && locals.old.descuento %>"></div>
             <% if (locals.errors && errors.descuento) { %>
                 <p><%=errors.descuento.msg%></p>
             <% } %> 

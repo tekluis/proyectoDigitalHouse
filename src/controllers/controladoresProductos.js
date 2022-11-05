@@ -5,24 +5,6 @@ const fs = require("fs");
 const path = require('path');                                           // habilita path
 const {validationResult} = require('express-validator');
 
-function cargarProductos(){
-    const jsonData = fs.readFileSync(path.join(__dirname, "../data/products.json"));
-    const data = JSON.parse(jsonData);
-    return data
-}
-
-
-function cargarCarrito(){
-    const jsonData = fs.readFileSync(path.join(__dirname, "../data/carrito.json"));
-    const data = JSON.parse(jsonData);
-    return data
-}
-
-function salvarCarrito(data){
-    const dataString = JSON.stringify(data, null, 4);
-    fs.writeFileSync(path.join(__dirname, "../data/carrito.json"), dataString);
- }
-
 let controladores = {
 
     index: function(req,res) {
@@ -85,7 +67,7 @@ let controladores = {
             where:{id:req.session.usuarioLogeado.id}
         })
         .then((usuario) => {
-            //res.send(usuario[0].products)
+            //res.send(usuario)
 
             res.render(path.join(__dirname,'../views/products/productCart.ejs'), {carrito:usuario[0].products}); 
         })

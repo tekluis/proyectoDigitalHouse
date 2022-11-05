@@ -26,5 +26,12 @@ module.exports = (sequelize, dataTypes) => {
 
     const Carrito = sequelize.define(alias, cols, config);
 
+    Carrito.associate = function(models) {
+        Carrito.belongsTo(models.products, { // models.Movies -> Movie es el valor de alias en movie.js
+            as: "products", // El nombre del modelo pero en plural
+            foreignKey: "id_products"
+        })
+    }
+
     return Carrito;
 }

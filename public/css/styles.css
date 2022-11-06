@@ -326,6 +326,11 @@ main section .products article{
         
     }
 
+    #recordar {
+        width: 20%;
+        margin: 5px 1px 5px 150px;
+    }
+
     div.botones {
         margin: auto;
         display: flex;

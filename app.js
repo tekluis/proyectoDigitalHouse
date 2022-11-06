@@ -10,6 +10,7 @@ const recordameMiddle = require('./src/middleware/recordameMiddle.js')
 const rutas = require('./src/routes/rutas.js');
 const rutasProductos = require('./src/routes/rutasProductos.js');
 const rutasUsuarios = require('./src/routes/rutasUsuarios.js');
+const apiRutasProductos = require('./src/routes/api/rutasProductos.js');
 
 
 var puerto=3030;
@@ -29,6 +30,8 @@ app.use(localsMiddle);                              // envía usuario a todas la
 app.use('/',rutas);                                 // define ruteo
 app.use('/product/',rutasProductos);                                 // define ruteo
 app.use('/user/',rutasUsuarios);                                 // define ruteo
+
+app.use('/api/products', apiRutasProductos);
 
 
 app.listen(puerto, ()=>{

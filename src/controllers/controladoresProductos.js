@@ -64,7 +64,8 @@ let controladores = {
         
         db.carrito.findAll({
             include:['products'],
-            where:{id_users:req.session.usuarioLogeado.id}
+            where:{id_users:req.session.usuarioLogeado.id},
+            order:[['id_products','ASC']]
         })
         .then((carritos) => {
             let listado=[];

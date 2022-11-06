@@ -62,14 +62,18 @@ let controladores = {
 
     productCart:  function(req,res) {
         
-        db.users.findAll({
+        db.carrito.findAll({
             include:['products'],
-            where:{id:req.session.usuarioLogeado.id}
+            where:{id_users:req.session.usuarioLogeado.id}
         })
-        .then((usuario) => {
-            //res.send(usuario)
+        .then((carritos) => {
+            let listado=[];
+            for(let i=0; i<carritos.length; i++){
+                let {products}=carritos[i];
+                listado.push(products)
+            }
 
-            res.render(path.join(__dirname,'../views/products/productCart.ejs'), {carrito:usuario[0].products}); 
+            res.render(path.join(__dirname,'../views/products/productCart.ejs'), {carrito:listado}); 
         })
 
     },        
@@ -131,13 +135,23 @@ let controladores = {
     },
 
     borrarCarrito: function(req,res) {
-        db.carrito.destroy ({
+        db.carrito.findOne({
             where: [
-                {id_users: req.session.usuarioLogeado.id},
-                {id_products: req.params.id}
-            ]
+                        {id_users: req.session.usuarioLogeado.id},
+                        {id_products: req.params.id}
+                    ]
+        })
+        .then(carrito => {
+            console.log(carrito.id);
+            db.carrito.destroy ({
+                where: [
+                    {id:carrito.id}
+                ]
+            })
         })
         .then(res.redirect('/product/cart'));
+
+
     },
 
     finalizarCompra: function(req,res) {

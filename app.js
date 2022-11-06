@@ -10,7 +10,9 @@ const recordameMiddle = require('./src/middleware/recordameMiddle.js')
 const rutas = require('./src/routes/rutas.js');
 const rutasProductos = require('./src/routes/rutasProductos.js');
 const rutasUsuarios = require('./src/routes/rutasUsuarios.js');
+
 const apiRutasProductos = require('./src/routes/api/rutasProductos.js');
+const apiRutasUsuarios = require('./src/routes/api/rutasUsuarios.js');
 
 
 var puerto=3030;
@@ -32,6 +34,7 @@ app.use('/product/',rutasProductos);                                 // define r
 app.use('/user/',rutasUsuarios);                                 // define ruteo
 
 app.use('/api/products', apiRutasProductos);
+app.use('/api/users', apiRutasUsuarios);
 
 
 app.listen(puerto, ()=>{
